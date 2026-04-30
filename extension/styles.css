@@ -1,0 +1,34 @@
+#bbmp-miniplayer-button {
+	align-items: center !important;
+	background: transparent !important;
+	border: 0 !important;
+	border-radius: 14px !important;
+	box-sizing: border-box !important;
+	color: #fff !important;
+	cursor: pointer !important;
+	display: inline-flex !important;
+	flex: 0 0 auto !important;
+	height: 48px !important;
+	justify-content: center !important;
+	line-height: normal !important;
+	margin: 0 !important;
+	opacity: 1 !important;
+	padding: 0 !important;
+	pointer-events: auto !important;
+	position: relative !important;
+	vertical-align: top !important;
+	width: 48px !important;
+}
+
+#bbmp-miniplayer-button:hover,
+#bbmp-miniplayer-button:focus-visible {
+	background: rgba(255, 255, 255, 0.16) !important;
+}
+
+#bbmp-miniplayer-button > svg {
+	display: block !important;
+	height: 24px !important;
+	pointer-events: none !important;
+	transform: translateY(4px) !important;
+	width: 24px !important;
+}
