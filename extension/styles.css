@@ -29,5 +29,6 @@
 	display: block !important;
 	height: 24px !important;
 	pointer-events: none !important;
+	transform: translateY(4px) !important;
 	width: 24px !important;
 }
