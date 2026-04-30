@@ -125,33 +125,73 @@
 		button.id = BUTTON_ID;
 		button.className = "ytp-button";
 		button.type = "button";
-		button.title = "Miniplayer (i)";
-		button.setAttribute("aria-label", "Miniplayer");
+		button.title = "";
+		button.setAttribute("aria-keyshortcuts", "i");
+		button.setAttribute("aria-label", "Miniplayer keyboard shortcut i");
 		button.setAttribute("data-title-no-tooltip", "Miniplayer");
+		button.setAttribute("data-tooltip-title", "Miniplayer (i)");
 		button.setAttribute("data-tooltip-target-id", "ytp-miniplayer-button");
 		button.setAttribute("data-priority", "11");
 
 		Object.assign(button.style, {
 			alignItems: "center",
-			color: "inherit",
+			background: "transparent",
+			border: "0",
+			borderRadius: "24px",
+			boxSizing: "border-box",
+			color: "#fff",
+			cursor: "pointer",
 			display: "inline-flex",
 			flex: "0 0 auto",
+			height: "48px",
 			justifyContent: "center",
 			lineHeight: "normal",
+			margin: "0",
+			opacity: "1",
+			padding: "0",
+			pointerEvents: "auto",
+			position: "relative",
 			verticalAlign: "top",
+			width: "48px",
 		});
 
 		button.appendChild(buildIcon());
 
-		button.addEventListener(
-			"click",
-			(event) => {
-				event.preventDefault();
-				event.stopPropagation();
-				triggerMiniplayer();
-			},
-			true
-		);
+		const icon = button.firstElementChild;
+		Object.assign(icon.style, {
+			display: "block",
+			height: "24px",
+			pointerEvents: "none",
+			width: "24px",
+		});
+
+		const setActive = (active) => {
+			button.style.backgroundColor = active
+				? "rgba(255, 255, 255, 0.18)"
+				: "transparent";
+		};
+
+		button.addEventListener("mouseenter", () => setActive(true));
+		button.addEventListener("mouseleave", () => setActive(false));
+		button.addEventListener("focus", () => setActive(true));
+		button.addEventListener("blur", () => setActive(false));
+
+		let lastActivation = 0;
+		const activate = (event) => {
+			event.preventDefault();
+			event.stopPropagation();
+
+			const now = Date.now();
+			if (now - lastActivation < 500) return;
+
+			lastActivation = now;
+			triggerMiniplayer();
+		};
+
+		button.addEventListener("pointerup", (event) => {
+			if (event.button === 0) activate(event);
+		}, true);
+		button.addEventListener("click", activate, true);
 
 		return button;
 	}
